@@ -74,3 +74,23 @@ export const registrarProducto = async (req, res) => {
   }
 };
 
+export const eliminarProducto = async (req, res) => {
+  try {
+    const [result] = await pool.query('DELETE FROM Categorias WHERE id_categoria = ?', [req.params.id]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        mensaje: `Error al eliminar la categoría. El ID ${req.params.id} no fue encontrado.`
+      });
+    }
+
+    res.status(204).send(); // Respuesta sin contenido para indicar éxito
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: 'Ha ocurrido un error al eliminar la categoría.',
+      error: error
+    });
+  }
+};
+
+
