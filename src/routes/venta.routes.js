@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { obtenerVentasConDetalles, obtenerVentas } from '../controllers/venta.controller.js';
+import { obtenerVentasConDetalles, obtenerVentas, eliminarVentas,registrarVenta } from '../controllers/venta.controller.js';
 
 const router = Router();
 
@@ -7,5 +7,9 @@ const router = Router();
 router.get('/venta', obtenerVentasConDetalles);
 
 router.get('/obtenerventas', obtenerVentas);
+
+router.delete('/eliminarventa/:id_venta', eliminarVentas);
+
+router.post('/registrarventa', registrarVenta);
 
 export default router;
