@@ -7,7 +7,7 @@ export const obtenerEmpleados= async (req, res) => {
     res.json(result);
   } catch (error) {
     return res.status(500).json({
-      mensaje: 'Ha ocurrido un error al leer los datos de los categoria.',
+      mensaje: 'Ha ocurrido un error al leer los datos de los empleados.',
       error: error
     });
   }
