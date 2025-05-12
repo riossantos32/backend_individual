@@ -31,6 +31,36 @@ export const obtenerVentasConDetalles = async (req, res) => {
   }
 };
 
+// Obtener una venta específica por id_venta
+export const obtenerVentaPorId = async (req, res) => {
+  try {
+    const { id_venta } = req.params;
+
+    const [venta] = await pool.query(`
+      SELECT 
+        id_venta,
+        id_cliente,
+        id_empleado,
+        fecha_venta,
+        total_venta
+      FROM Ventas
+      WHERE id_venta = ?
+    `, [id_venta]);
+
+    if (venta.length === 0) {
+      return res.status(404).json({ mensaje: 'Venta no encontrada' });
+    }
+
+    res.json(venta[0]); // Devuelve solo el primer objeto (una sola venta)
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: 'Ha ocurrido un error al obtener los datos de la venta.',
+      error: error.message
+    });
+  }
+};
+
+
 // Obtener todas las ventas
 export const obtenerVentas = async (req, res) => {
   try {
@@ -56,7 +86,7 @@ export const obtenerVentas = async (req, res) => {
 };
 
 // Eliminar una venta (los detalles se eliminan automáticamente por ON DELETE CASCADE)
-export const eliminarVentas = async (req, res) => {
+export const eliminarVenta = async (req, res) => {
   try {
     const { id_venta } = req.params;
 
@@ -76,11 +106,11 @@ export const eliminarVentas = async (req, res) => {
 };
 
 // Registrar una nueva venta con detalles
-export const registrarVenta = async (req, res) => {
+export const registrarVentas = async (req, res) => {
   const { id_cliente, id_empleado, fecha_venta, total_venta, detalles } = req.body;
 
   try {
-    const fechaVentaFormateada = new Date(fecha_venta).toISOString().slice(0, 19).replace('T', ' '); // Convierte a 'YYYY-MM-DD HH:mm:ss'
+    const fechaVentaFormateada = new fecha_venta.toISOString().slice(0, 19).replace('T', ' '); // Convierte a 'YYYY-MM-DD HH:mm:ss'
     const [ventaResult] = await pool.query(
       'INSERT INTO Ventas (id_cliente, id_empleado, fecha_venta, total_venta) VALUES (?, ?, ?, ?)',
       [id_cliente, id_empleado, fechaVentaFormateada , total_venta]

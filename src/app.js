@@ -27,7 +27,6 @@ app.use('/api', rutasCategorias);
 app.use('/api', rutasVenta);
 app.use('/api', productos);
 app.use('/api', rutasDetallesVentas);
-
 app.use('/api', ontenerempleados);
 
 // Manejo de rutas no encontradas

@@ -21,7 +21,7 @@ export const obtenerDetallesVenta = async (req, res) => {
     `,
       [id]
     );
-
+    
     if (result.length === 0) {
       return res.status(404).json({
         mensaje: 'No se encontraron detalles para esta venta.',
