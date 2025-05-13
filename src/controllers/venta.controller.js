@@ -106,11 +106,11 @@ export const eliminarVenta = async (req, res) => {
 };
 
 // Registrar una nueva venta con detalles
-export const registrarVentas = async (req, res) => {
+export const registrarVenta = async (req, res) => {
   const { id_cliente, id_empleado, fecha_venta, total_venta, detalles } = req.body;
 
   try {
-    const fechaVentaFormateada = new fecha_venta.toISOString().slice(0, 19).replace('T', ' '); // Convierte a 'YYYY-MM-DD HH:mm:ss'
+    const fechaVentaFormateada = new Date(fecha_venta).toISOString().slice(0, 19).replace('T', ' '); // Convierte a 'YYYY-MM-DD HH:mm:ss'
     const [ventaResult] = await pool.query(
       'INSERT INTO Ventas (id_cliente, id_empleado, fecha_venta, total_venta) VALUES (?, ?, ?, ?)',
       [id_cliente, id_empleado, fechaVentaFormateada , total_venta]
@@ -135,6 +135,7 @@ export const registrarVentas = async (req, res) => {
   }
 };
 
+
 // Actualizar una venta con sus detalles
 export const actualizarVenta = async (req, res) => {
   const { id_venta } = req.params;
@@ -142,7 +143,7 @@ export const actualizarVenta = async (req, res) => {
 
   try {
     // Formatear la fecha al formato MySQL
-    const fechaVentaFormateada = new Date(fecha_venta).toISOString().slice(0, 19).replace('T', ' ');
+    const fechaVentaFormateada = new fecha_venta.toISOString().slice(0, 19).replace('T', ' ');
 
     // Actualizar la venta
     const [ventaResult] = await pool.query(

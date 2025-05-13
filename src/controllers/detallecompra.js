@@ -1,4 +1,6 @@
 
+import { pool } from '../db.js';
+
 // Controlador para obtener los detalles de una compra por id_compra
 export const obtenerDetallesCompra = async (req, res) => {
   const { id } = req.params; // Obtiene el id de los parámetros de la URL
