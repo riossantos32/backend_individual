@@ -18,4 +18,4 @@ export const pool2 = createPool({
   port: DB_PORT2,
   database: DB_DATABASE2
 });
-
+  
