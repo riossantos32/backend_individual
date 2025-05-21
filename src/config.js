@@ -12,8 +12,8 @@ export const DB_DATABASE = process.env.DB_DATABASE || 'ferreteria_bd';
 export const PORT2 = process.env.PORT2 || 3000;
 export const DB_HOST2 = process.env.DB_HOST2 || 'localhost';
 export const DB_PORT2 = process.env.DB_PORT2 || 3306;
-export const DB_USER2 = process.env.DB_USER2 || 'Backend';
-export const DB_PASSWORD2 = process.env.DB_PASSWORD2 || '123456';
+export const DB_USER2 = process.env.DB_USER2 || 'yosmar';
+export const DB_PASSWORD2 = process.env.DB_PASSWORD2 || 'Ungrandia34!';
 export const DB_DATABASE2 = process.env.DB_DATABASE2 || 'ferreteria_selva_datamart';
 
 
